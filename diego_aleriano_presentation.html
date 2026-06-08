@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego Aleriano × Alex Mike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e0b;
+  --bg2: #0f1410;
+  --bg3: #131a14;
+  --sage: #7a9e7e;
+  --sage-light: #a8c5ac;
+  --sage-dim: #3d5c41;
+  --cream: #e8e0d0;
+  --cream-dim: #b5ad9d;
+  --white: #f4f0e8;
+  --red: #c94a3c;
+  --red-dim: #8a2f25;
+  --gold: #c8a96e;
+  --gold-dim: #7a6440;
+  --text: #d4cfc5;
+  --text-dim: #7a756c;
+  --border: rgba(122,158,126,0.15);
+  --border-strong: rgba(122,158,126,0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--sage-dim); }
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ─── FADE ANIMATIONS ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up.delay-1 { transition-delay: 0.15s; }
+.fade-up.delay-2 { transition-delay: 0.3s; }
+.fade-up.delay-3 { transition-delay: 0.45s; }
+.fade-up.delay-4 { transition-delay: 0.6s; }
+
+/* ─── SECTION BASE ─── */
+section {
+  padding: 80px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ─── DIVIDER ─── */
+.section-divider {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sage-dim), transparent);
+  opacity: 0.4;
+}
+
+/* ─── LABEL TAG ─── */
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--sage);
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(42px, 10vw, 72px);
+  line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 5vw, 32px);
+  line-height: 1.2;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--sage-light);
+  letter-spacing: 0.02em;
+}
+p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.75;
+}
+em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.15em;
+  color: var(--cream);
+}
+
+/* ═══════════════════════════════════
+   01 — HERO
+═══════════════════════════════════ */
+#hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-circle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122,158,126,0.07) 0%, transparent 70%);
+  top: -100px;
+  right: -200px;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 20px;
+}
+
+.hero-name-block {
+  margin-bottom: 32px;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(52px, 13vw, 88px);
+  line-height: 0.95;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  display: block;
+}
+.hero-name-accent {
+  color: var(--sage-light);
+  font-style: italic;
+}
+
+.hero-descriptor {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  border: 1px solid var(--border-strong);
+  padding: 5px 12px;
+  border-radius: 2px;
+}
+
+.hero-quote {
+  margin-top: 40px;
+  padding-left: 20px;
+  border-left: 2px solid var(--sage-dim);
+}
+.hero-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+.hero-quote-source {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  letter-spacing: 0.1em;
+}
+
+.hero-scroll {
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.hero-scroll::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--sage));
+  animation: scrollLine 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes scrollLine { 0%,100% { transform: scaleY(0.5); transform-origin: top; } 50% { transform: scaleY(1); } }
+
+/* ═══════════════════════════════════
+   02 — DIAGNÓSTICO
+═══════════════════════════════════ */
+#diagnostico {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.pain-list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pain-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.pain-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.pain-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--sage-dim);
+  padding-top: 4px;
+  letter-spacing: 0.1em;
+}
+
+.pain-content h3 {
+  color: var(--cream);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.pain-content p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.diagnostico-cierre {
+  margin-top: 48px;
+  padding: 28px;
+  background: var(--bg3);
+  border-left: 2px solid var(--sage);
+  border-radius: 2px;
+}
+.diagnostico-cierre p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════
+   03 — BENCHMARK
+═══════════════════════════════════ */
+#benchmark {
+  background: var(--bg2);
+  max-width: 100%;
+  padding: 80px 24px;
+}
+.benchmark-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.compare-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.compare-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.compare-card.highlight {
+  border-color: var(--sage-dim);
+}
+.compare-card.highlight::before {
+  content: 'REFERENTE';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--sage);
+  background: rgba(122,158,126,0.1);
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.compare-handle {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--sage-light);
+  margin-bottom: 20px;
+}
+
+.compare-stat {
+  margin-bottom: 14px;
+}
+.compare-stat-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 3px;
+}
+.compare-stat-value {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+}
+.compare-stat-value.big {
+  font-size: 28px;
+  color: var(--sage-light);
+}
+
+.compare-list {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.compare-list li {
+  font-size: 12px;
+  color: var(--text-dim);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.compare-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--sage-dim);
+}
+.compare-list li.has {
+  color: var(--sage-light);
+}
+.compare-list li.has::before {
+  content: '✓';
+  color: var(--sage);
+}
+.compare-list li.no::before {
+  content: '✗';
+  color: var(--red-dim);
+}
+
+.benchmark-gap {
+  margin-top: 32px;
+  padding: 24px;
+  background: rgba(201,74,60,0.08);
+  border: 1px solid rgba(201,74,60,0.2);
+  border-radius: 4px;
+  text-align: center;
+}
+.benchmark-gap-number {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.benchmark-gap p {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.benchmark-cierre {
+  margin-top: 40px;
+  padding: 28px;
+  background: var(--bg3);
+  border-left: 2px solid var(--gold);
+  border-radius: 2px;
+}
+.benchmark-cierre p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════
+   04 — YA EMPECÉ
+═══════════════════════════════════ */
+#valor {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.valor-items {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.valor-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 32px 28px;
+  border-radius: 4px;
+  position: relative;
+}
+.valor-item-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--sage-dim);
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+.valor-item h3 {
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.valor-item p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.hook-example {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(122,158,126,0.06);
+  border-left: 2px solid var(--sage-dim);
+  border-radius: 2px;
+}
+.hook-example-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage-dim);
+  margin-bottom: 8px;
+}
+.hook-example p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--cream);
+}
+
+.embudo-visual {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.embudo-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.embudo-step:last-child { border-bottom: none; }
+.embudo-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sage-dim);
+  flex-shrink: 0;
+}
+.embudo-step-dot.active { background: var(--sage); }
+.embudo-step-text {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.embudo-step-text strong {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.valor-cierre {
+  margin-top: 40px;
+  padding: 28px;
+  background: var(--bg3);
+  border-left: 2px solid var(--sage);
+  border-radius: 2px;
+}
+.valor-cierre p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════
+   07 — EL ACTIVO
+═══════════════════════════════════ */
+#activo {
+  background: var(--bg2);
+  max-width: 100%;
+  padding: 80px 24px;
+}
+.activo-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.activo-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(32px, 7vw, 52px);
+  line-height: 1.15;
+  color: var(--white);
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+.activo-headline em {
+  color: var(--sage-light);
+  font-style: italic;
+}
+
+.activo-body p {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.activo-pillars {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.pillar {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.pillar-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--sage);
+}
+.pillar h3 {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: var(--cream);
+}
+.pillar p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.golden-cage {
+  margin-top: 40px;
+  padding: 36px 28px;
+  background: linear-gradient(135deg, rgba(200,169,110,0.06) 0%, rgba(122,158,126,0.04) 100%);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 6px;
+  text-align: center;
+}
+.golden-cage p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 4vw, 24px);
+  color: var(--gold);
+  line-height: 1.5;
+}
+
+.quien-soy {
+  margin-top: 40px;
+  padding: 32px 28px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.quien-soy-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.quien-soy-avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--sage-dim), var(--bg3));
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--sage-light);
+  flex-shrink: 0;
+}
+.quien-soy-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--white);
+}
+.quien-soy-role {
+  font-size: 11px;
+  color: var(--sage);
+  letter-spacing: 0.1em;
+}
+.quien-soy-body p {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+.credenciales {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.credencial {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.credencial::before {
+  content: '◆';
+  color: var(--sage-dim);
+  font-size: 8px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════
+   08 — CTA
+═══════════════════════════════════ */
+#cta {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.cta-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(36px, 9vw, 64px);
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+  margin-top: 24px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto 48px;
+  line-height: 1.8;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--red);
+  color: #fff;
+  text-decoration: none;
+  padding: 18px 36px;
+  border-radius: 4px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cta-button:hover::before { opacity: 1; }
+.cta-button:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,74,60,0.35); }
+
+.cta-button svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cta-note {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.cta-final-phrase {
+  margin-top: 64px;
+  padding: 0 16px;
+}
+.cta-final-phrase p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 4vw, 26px);
+  color: var(--sage-light);
+  line-height: 1.5;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+}
+footer p {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+footer span {
+  color: var(--sage-dim);
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 01 HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg-circle"></div>
+
+  <div class="hero-eyebrow fade-up">BE AI · Análisis Estratégico Privado</div>
+
+  <div class="hero-name-block fade-up delay-1">
+    <span class="hero-name">Diego</span>
+    <span class="hero-name hero-name-accent">Aleriano.</span>
+  </div>
+
+  <div class="hero-descriptor fade-up delay-2">
+    <span class="hero-tag">Psicólogo Psicoanalítico</span>
+    <span class="hero-tag">Maestrante UNIVA</span>
+    <span class="hero-tag">Guadalajara</span>
+  </div>
+
+  <div class="hero-quote fade-up delay-3">
+    <p>"Psicología que ilumina,<br>no que juzga."</p>
+    <div class="hero-quote-source">— Tu frase. Tu marca. Tu diferenciador real.</div>
+  </div>
+
+  <div class="hero-scroll fade-up delay-4">
+    Continúa leyendo
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ 02 DIAGNÓSTICO ═══ -->
+<section id="diagnostico">
+  <div class="label fade-up">02 — Diagnóstico</div>
+  <h2 class="fade-up delay-1">Lo que vi cuando analicé tu marca</h2>
+
+  <div class="pain-list">
+
+    <div class="pain-item fade-up delay-1">
+      <div class="pain-number">01</div>
+      <div class="pain-content">
+        <h3>Presencia sin sistema de captación</h3>
+        <p>Tienes un reel con 1,198 vistas sobre 91 seguidores. Ese ratio es extraordinario — 13:1. El contenido tiene alcance real. Pero el funnel se rompe en el segundo paso: el único CTA es un número de teléfono. No hay captura automática. El 95% de ese alcance se evapora sin dejar rastro.</p>
+      </div>
+    </div>
+
+    <div class="pain-item fade-up delay-1">
+      <div class="pain-number">02</div>
+      <div class="pain-content">
+        <h3>Una sola oferta atada a tu tiempo</h3>
+        <p>$300 MXN por consulta. Cada peso que entra requiere que estés presente. No hay escalera de valor, no hay producto digital, no hay recurrente. Tu ingreso tiene techo biológico — no puede crecer más allá de las horas que tienes.</p>
+      </div>
+    </div>
+
+    <div class="pain-item fade-up delay-1">
+      <div class="pain-number">03</div>
+      <div class="pain-content">
+        <h3>Nicho demasiado amplio para el algoritmo</h3>
+        <p>Tu contenido habla a "quien necesite psicología". El algoritmo no sabe a quién empujarlo. Los perfiles que escalan en tu nicho tienen un avatar ultrapreciso: hombres 25–35 que no saben cómo procesar sus emociones, jóvenes adultos que sienten que algo falla pero no lo pueden nombrar. Tú tienes la frase para lograrlo — solo falta aplicarla con consistencia.</p>
+      </div>
+    </div>
+
+    <div class="pain-item fade-up delay-1">
+      <div class="pain-number">04</div>
+      <div class="pain-content">
+        <h3>El canal más poderoso completamente dormido</h3>
+        <p>Cero stories. Las historias son donde se construye la confianza diaria, donde se vende sin parecer que vendes, donde tu audiencia te ve como persona y no como proveedor de servicio. Sin stories, los 91 seguidores que tienes no te recuerdan entre publicaciones.</p>
+      </div>
+    </div>
+
+    <div class="pain-item fade-up delay-1">
+      <div class="pain-number">05</div>
+      <div class="pain-content">
+        <h3>Identidad visible en el feed, invisible en la bio</h3>
+        <p>Tu frase diferenciadora existe. Tu cédula existe. Tu consultorio existe. Pero la bio solo dice teléfono. La primera impresión que un nuevo visitante recibe no refleja la profundidad de lo que haces ni activa ningún paso hacia conocerte mejor.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="diagnostico-cierre fade-up">
+    <p>No te digo esto para criticarte.<br>Te lo digo porque ya sé exactamente cómo resolverlo.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ 03 BENCHMARK ═══ -->
+<section id="benchmark" style="background:var(--bg2);max-width:100%;padding:80px 24px;">
+<div class="benchmark-inner">
+  <div class="label fade-up">03 — Benchmarking</div>
+  <h2 class="fade-up delay-1">Esto es lo que genera<br>quien juega en tu nivel</h2>
+
+  <div class="compare-grid fade-up delay-2">
+
+    <div class="compare-card">
+      <div class="compare-handle">@diegoaleriano.psic</div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Seguidores</div>
+        <div class="compare-stat-value">91</div>
+      </div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Reels publicados</div>
+        <div class="compare-stat-value">1</div>
+      </div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Ingreso estimado/mes</div>
+        <div class="compare-stat-value" style="font-size:15px;color:var(--text-dim);">$600–$1,200 MXN</div>
+      </div>
+      <ul class="compare-list">
+        <li class="has">Frase diferenciadora propia</li>
+        <li class="has">Expertise académico verificable</li>
+        <li class="has">Contenido con alcance orgánico real</li>
+        <li class="no">Sin stories activas</li>
+        <li class="no">Sin escalera de valor</li>
+        <li class="no">Sin sistema de captación</li>
+      </ul>
+    </div>
+
+    <div class="compare-card highlight">
+      <div class="compare-handle">@psic.alfonsovargas</div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Seguidores</div>
+        <div class="compare-stat-value big">88,700</div>
+      </div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Likes · reel más viral</div>
+        <div class="compare-stat-value" style="color:var(--gold);font-size:22px;">365,000</div>
+      </div>
+      <div class="compare-stat">
+        <div class="compare-stat-label">Reconocimiento externo</div>
+        <div class="compare-stat-value" style="font-size:12px;color:var(--sage-light);">TEDxUNICA 2026</div>
+      </div>
+      <ul class="compare-list">
+        <li class="has">Hooks controversiales en <2s</li>
+        <li class="has">Nicho: hombres + salud mental</li>
+        <li class="has">3–4 reels/semana constantes</li>
+        <li class="has">Comunidad propia @hombres.unidos.mx</li>
+        <li class="has">Color de marca: amarillo propio</li>
+        <li>Sin funnel visible en IG (misma brecha)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="benchmark-gap fade-up delay-2">
+    <div class="benchmark-gap-number">~3 años</div>
+    <p>Es la diferencia entre ambos perfiles. No es talento. No es título. No es ciudad.<br>Es sistema y consistencia. Él ya lo demostró. Tú ya tienes lo más difícil: la base.</p>
+  </div>
+
+  <div class="benchmark-cierre fade-up">
+    <p>No estás lejos.<br>Estás a un sistema de distancia.</p>
+  </div>
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ 04 YA EMPECÉ ═══ -->
+<section id="valor">
+  <div class="label fade-up">04 — Aporte Inmediato</div>
+  <h2 class="fade-up delay-1">Ya empecé a trabajar<br>en tu caso</h2>
+
+  <div class="valor-items">
+
+    <div class="valor-item fade-up delay-1">
+      <div class="valor-item-number">ENTREGA 01 — HOOKS ADAPTADOS A TU VOZ</div>
+      <h3>Lo que hace Alfonso que tú puedes hacer mejor</h3>
+      <p>Alfonso usa declaraciones polémicas para generar debate. Tú tienes algo más poderoso: la terminología psicoanalítica como diferenciador. Nadie más en tu nicho habla del "sujeto" — eso te hace sonar más real, más profundo, más académico sin ser aburrido.</p>
+      <p>Estructura de hooks que funcionan con tu perfil:</p>
+      <div class="hook-example">
+        <div class="hook-example-label">Hook A — Verdad incómoda</div>
+        <p>"La terapia NO te va a curar. Y está bien."</p>
+      </div>
+      <div class="hook-example" style="margin-top:10px;">
+        <div class="hook-example-label">Hook B — Validación del avatar</div>
+        <p>"Si sientes que algo no está bien pero no sabes qué es, esto es para ti."</p>
+      </div>
+      <div class="hook-example" style="margin-top:10px;">
+        <div class="hook-example-label">Hook C — Tu frase como gancho visual</div>
+        <p>Pantalla negra. Texto grande: "Psicología que ilumina, no que juzga." Dos segundos. Luego tú apareces.</p>
+      </div>
+    </div>
+
+    <div class="valor-item fade-up delay-2">
+      <div class="valor-item-number">ENTREGA 02 — EMBUDO QUE FUNCIONA CON 91 SEGUIDORES</div>
+      <h3>El sistema que puedes instalar esta semana</h3>
+      <p>No necesitas 1,000 seguidores para empezar a capturar leads. Necesitas redirigir el tráfico que ya tienes. Cambio mínimo, impacto máximo:</p>
+      <div class="embudo-visual">
+        <div class="embudo-step">
+          <div class="embudo-step-dot active"></div>
+          <div class="embudo-step-text"><strong>Bio actualizada</strong> — Cédula visible + "Escríbeme INICIO para tu primera sesión"</div>
+        </div>
+        <div class="embudo-step">
+          <div class="embudo-step-dot active"></div>
+          <div class="embudo-step-text"><strong>Story diaria</strong> — 1 pensamiento del día desde el consultorio. 5 minutos. Sin edición. Solo tú hablando.</div>
+        </div>
+        <div class="embudo-step">
+          <div class="embudo-step-dot active"></div>
+          <div class="embudo-step-text"><strong>CTA en cada reel</strong> — "¿Estás pasando por algo así? Escríbeme INICIO" en lugar del teléfono.</div>
+        </div>
+        <div class="embudo-step">
+          <div class="embudo-step-dot active"></div>
+          <div class="embudo-step-text"><strong>Respuesta en DM</strong> — Template de mensaje de bienvenida que califica y agenda en una sola respuesta.</div>
+        </div>
+        <div class="embudo-step">
+          <div class="embudo-step-dot"></div>
+          <div class="embudo-step-text"><strong>Siguiente fase</strong> — Automatización, escalera de valor, lanzamiento digital.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="valor-cierre fade-up">
+    <p>Esto es lo que haría en tu caso<br>en los primeros 30 días.<br>Te lo doy sin compromiso.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ 07 EL ACTIVO ═══ -->
+<section id="activo" style="background:var(--bg2);max-width:100%;padding:80px 24px;">
+<div class="activo-inner">
+
+  <div class="label fade-up">07 — La Propuesta</div>
+  <div class="activo-headline fade-up delay-1">
+    No te ofrezco un servicio.<br>Te propongo un <em>activo.</em>
+  </div>
+
+  <div class="activo-body fade-up delay-2">
+    <p>Un servicio termina cuando dejas de pagarlo. Un activo trabaja aunque tú no estés. Lo que construiríamos juntos no es una campaña ni una estrategia de redes — es un sistema de atracción, confianza y conversión que funciona de forma autónoma.</p>
+    <p>Tú te dedicas a lo que sabes hacer mejor: la escucha, el análisis, el acompañamiento. Yo trabajo detrás de escena para que ese talento llegue a quien lo necesita — sin que tengas que perseguir clientes ni depender del boca en boca.</p>
+  </div>
+
+  <div class="activo-pillars fade-up delay-2">
+    <div class="pillar">
+      <div class="pillar-icon">01</div>
+      <div>
+        <h3>Sistema de contenido con identidad</h3>
+        <p>Reels consistentes con tu voz, tu filosofía y tu diferenciador. No contenido genérico — contenido que construye la marca Diego Aleriano.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">02</div>
+      <div>
+        <h3>Embudo de captación automatizado</h3>
+        <p>Desde el primer contacto en DM hasta la sesión agendada, con seguimiento que funciona sin intervención manual.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">03</div>
+      <div>
+        <h3>Escalera de valor digital</h3>
+        <p>Free → Low ticket → High ticket → Recurrente. Tus conocimientos en formatos que no requieren tu presencia para generar ingreso.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">04</div>
+      <div>
+        <h3>Sociedad, no servicio</h3>
+        <p>Trabajo contigo como socio de crecimiento. Mi resultado depende del tuyo. Sin eso, no me interesa.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="golden-cage fade-up delay-3">
+    <p>"Tienes talento real atrapado en una operación que depende 100% de tu tiempo.<br>Eso se puede resolver."</p>
+  </div>
+
+  <div class="quien-soy fade-up delay-3" style="margin-top:40px;">
+    <div class="quien-soy-header">
+      <div class="quien-soy-avatar">AM</div>
+      <div>
+        <div class="quien-soy-name">Alex Mike</div>
+        <div class="quien-soy-role">Shadow Operator · BE AI</div>
+      </div>
+    </div>
+    <div class="quien-soy-body">
+      <p>Escalo negocios digitales desde las sombras. Mi trabajo no aparece en pantalla — el tuyo sí.</p>
+      <div class="credenciales">
+        <div class="credencial">Shadow Operator formado con David Turu — método de lanzamiento digital</div>
+        <div class="credencial">Colaboré en el lanzamiento de Paulattier como Gerente del CMO</div>
+        <div class="credencial">Diplomado con Benoist — Habilidades de Altos Ingresos y PNL en Negocios</div>
+        <div class="credencial">Trabajo con máximo 2 proyectos simultáneos — no soy agencia, soy socio</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ 08 CTA ═══ -->
+<section id="cta">
+  <div class="label fade-up" style="justify-content:center;">08 — Siguiente Paso</div>
+  <div class="cta-headline fade-up delay-1">
+    Estudiemos<br>tu caso.
+  </div>
+  <p class="cta-sub fade-up delay-2">
+    30 minutos. Sin compromiso. Sin precio.<br>
+    Solo para ver si tiene sentido trabajar juntos — si comparte la visión, la disciplina, la dirección.
+  </p>
+
+  <div class="fade-up delay-3">
+    <a
+      class="cta-button"
+      href="https://wa.me/522205717032?text=Hola%20Alex%2C%20vi%20la%20presentaci%C3%B3n%20y%20me%20interesa%20explorar%20c%C3%B3mo%20podr%C3%ADa%20funcionar%20esto%20para%20mi%20caso%20%E2%80%94%20Diego%20Aleriano"
+      target="_blank"
+      rel="noopener"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Agendar llamada de diagnóstico
+    </a>
+  </div>
+
+  <p class="cta-note fade-up delay-4">Sin costo · 30 minutos · Solo para ver si tiene sentido</p>
+
+  <div class="cta-final-phrase fade-up delay-4">
+    <p>"Tienes una frase que ilumina y no juzga.<br>Es hora de que el sistema la amplifique."</p>
+  </div>
+</section>
+
+<footer>
+  <p>BE AI · <span>Alex Mike</span> · Shadow Operator · 2026</p>
+</footer>
+
+<script>
+// Intersection Observer para fade animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
